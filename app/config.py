@@ -1,11 +1,14 @@
 # config
+import os
+
+db_path = os.path.join(os.environ.get('HOME', os.environ.get('USERPROFILE')), 'db', 'example.db')
 
 
 class Configuration(object):
     DATABASE = {
-        'name': 'example.db',
+        'name': db_path,
         'engine': 'peewee.SqliteDatabase',
         'check_same_thread': False,
     }
-    DEBUG = True
-    SECRET_KEY = 'shhhh'
+    DEBUG = False
+    SECRET_KEY = 'shhh86468486h'
