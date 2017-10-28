@@ -1,0 +1,1 @@
+run setup.py before build your docker image
