@@ -10,11 +10,10 @@ class Point(db.Model):
     latitude = TextField()  # 维度
     treasure = TextField()
     created_date = DateTimeField(default=datetime.datetime.now)
-    # some_things = TextField()
 
 
 class Tag(db.Model):
-    tag = CharField()
+    tag = TextField()
 
 
 class PointTag(db.Model):

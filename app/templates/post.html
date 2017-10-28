@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>post point</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="/">
+                <button class="btn btn-default">index</button>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/post" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">经度
+                        <input type="number" step="0.0001" class="form-control" name="longitude">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">维度
+                        <input type="number" step="0.0001" class="form-control" name="latitude">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">有啥东西</label>
+                </div>
+                <div class="checkbox">
+
+                    <ul>
+                        {% for tag in tags %}
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="treasure" value="{{ tag.tag }}">{{ tag.tag }}
+                                </label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
