@@ -1,1 +1,1 @@
-run setup.py before build your docker image
+run setup.py to create tables in database first
