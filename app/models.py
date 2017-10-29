@@ -9,7 +9,7 @@ class Point(db.Model):
     longitude = TextField()  # 经度
     latitude = TextField()  # 维度
     treasure = TextField()
-    created_date = DateTimeField(default=datetime.datetime.now)
+    created_date = DateTimeField(default=lambda: datetime.datetime.now() + datetime.timedelta(hours=8))
 
 
 class Tag(db.Model):
