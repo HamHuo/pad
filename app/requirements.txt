@@ -2,7 +2,5 @@ flask
 werkzeug
 jinja2
 peewee
-wtforms
-wtf-peewee
 flask-peewee
 pytz

@@ -1,1 +1,1 @@
-run setup.py to create tables in database first
+run `python setup.py init`to create tables in database first
