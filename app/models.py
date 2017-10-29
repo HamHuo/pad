@@ -1,15 +1,18 @@
 import datetime
 
+import pytz
 from peewee import *
 
 from app import db
+
+tz = pytz.timezone('Asia/Shanghai')
 
 
 class Point(db.Model):
     longitude = TextField()  # 经度
     latitude = TextField()  # 维度
     treasure = TextField()
-    created_date = DateTimeField(default=lambda: datetime.datetime.now() + datetime.timedelta(hours=8))
+    created_date = DateTimeField(default=lambda: datetime.datetime.now(tz))
 
 
 class Tag(db.Model):
