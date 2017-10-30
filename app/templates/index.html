@@ -30,14 +30,18 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <label for="search">Search</label>
-            <input type="text" class="form-control" id="search" title="233">
-            <button type="submit" onclick="window.location.href = '/tag/'+$('#search').val();" class="btn btn-default">
-                Go
-            </button>
+            <h2>filter</h2>
+            {% for tag in tags %}
+                <a href="/tag/{{ tag.tag }}">
+                    <button class="btn btn-default">{{ tag.tag }}</button>
+                </a>
+            {% endfor %}
+
         </div>
     </div>
-
+    <div class="row">
+        <hr>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped">

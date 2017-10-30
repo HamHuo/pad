@@ -1,6 +1,6 @@
 import datetime
-import pytz
 
+import pytz
 from flask import render_template, request, redirect
 
 from app import app
@@ -18,8 +18,9 @@ print(dtobj_hongkong)
 @app.route('/')
 def homepage():
     x = Point.select().order_by(Point.created_date.desc()).execute()
+    tags = Tag.select().execute()
     # print(x.__dict__)
-    return render_template('index.html', points=x)
+    return render_template('index.html', points=x, tags=tags)
 
 
 @app.route('/tag/<tag>')
