@@ -1,6 +1,6 @@
 import sys
 
-from models import create_tables, Tag, Point
+from models import create_tables, Tag, Point, PointTag
 
 if sys.argv[1] == 'init':
     create_tables()
@@ -11,3 +11,4 @@ if sys.argv[1] == 'init':
 
 if sys.argv[1] == 'clear':
     Point.delete().execute()
+    PointTag.delete().execute()

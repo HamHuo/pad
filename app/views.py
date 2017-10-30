@@ -28,7 +28,9 @@ def query_tag(tag):
     x = (Point.select().join(PointTag).join(Tag)
          .where(Tag.tag == tag)
          .order_by(Point.created_date.desc()))
-
+    # print(x)
+    for y in x:
+        print(y.__dict__['_data'])
     # x = Point.select().order_by(Point.created_date.desc()).execute()
     # print(x.__dict__)
     return render_template('index.html', points=x)
