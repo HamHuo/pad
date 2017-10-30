@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
 </head>
 <body>
 
@@ -37,8 +36,16 @@
                 </tr>
                 {% for point in points %}
                     <tr>
-                        <td>{{ point.longitude }}</td>
-                        <td>{{ point.latitude }}</td>
+                        <td data-clipboard-text="{{ point.longitude }}">
+                            <button class="btn btn-default">
+                                {{ point.longitude }}
+                            </button>
+                        </td>
+                        <td data-clipboard-text="{{ point.latitude }}">
+                            <button class="btn btn-default">
+                                {{ point.latitude }}
+                            </button>
+                        </td>
                         <td>{{ point.treasure }}</td>
                         <td>{{ point.created_date }}</td>
                     </tr>
@@ -48,6 +55,9 @@
         </div>
     </div>
 </div>
-
+<script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
+<script>
+    new Clipboard('td');
+</script>
 </body>
 </html>
