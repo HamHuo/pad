@@ -12,3 +12,13 @@ if sys.argv[1] == 'init':
 if sys.argv[1] == 'clear':
     Point.delete().execute()
     PointTag.delete().execute()
+
+if sys.argv[1] == 'add':
+    if sys.argv[2] == 'tag':
+        Tag.create(sys.argv[3])
+if sys.argv[1] == 'delete':
+    if sys.argv[2] == 'tag':
+        t = Tag.get(sys.argv[3])
+        t.delete()
+    if sys.argv[2] == 'point':
+        Point.get(longitude=sys.argv[3], latitude=sys.argv[4]).delete()
