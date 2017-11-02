@@ -18,9 +18,14 @@ print(dtobj_hongkong)
 @app.route('/')
 def homepage():
     x = Point.select().order_by(Point.created_date.desc()).execute()
-    tags = Tag.select().execute()
     # print(x.__dict__)
-    return render_template('index.html', points=x, tags=tags)
+    return render_template('index.html', points=x)
+
+
+@app.route('/filter.html')
+def filter():
+    tags = Tag.select().execute()
+    return render_template('filter.html', tags=tags)
 
 
 @app.route('/tag/<tag>')
@@ -62,6 +67,13 @@ def show_post():
     # Point.get_or_create(latitude=latitude, longitude=longitude,
     #                     defaults={'treasure': ', '.join(treasure)})
     # return redirect('/')
+
+
+@app.route('/nearest/<float:lon>/<float:lat>')
+def near(lon, lat):
+    x = list(Point.select().order_by(Point.created_date.desc()).execute())  # type: list[Point]
+    x.sort(key=lambda x: (float(x.longitude) - lon) ** 2 + (float(x.latitude) - lat) ** 2)
+    return render_template('index.html', points=x)
 
 
 def isfloat(value):

@@ -24,43 +24,16 @@
             <a href="/post.html">
                 <button class="btn btn-default">分享坐标</button>
             </a>
-            <a href="/filter.html">
-                <button class="btn btn-default">筛选</button>
-            </a>
-        </div>
-    </div>
-    <div class="row">
-        <hr>
+       </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-striped">
-                <tr>
-                    <td>维度</td>
-                    <td>经度</td>
-                    <td>有啥玩意</td>
-                    <td>发现时间</td>
-                    <td>附近</td>
-                </tr>
-                {% for point in points %}
-                    <tr>
-                        <td data-clipboard-text="{{ point.longitude }}">
-                            <button class="btn btn-default">
-                                {{ point.longitude }}
-                            </button>
-                        </td>
-                        <td data-clipboard-text="{{ point.latitude }}">
-                            <button class="btn btn-default">
-                                {{ point.latitude }}
-                            </button>
-                        </td>
-                        <td>{{ point.treasure }}</td>
-                        <td>{{ point.created_date[:19] }}</td>
-                        <td><a href="/nearest/{{ point.longitude }}/{{ point.latitude }}">附近的其他坐标</a></td>
-                    </tr>
-                {% endfor %}
-
-            </table>
+            <h2>filter</h2>
+            {% for tag in tags %}
+                <a href="/tag/{{ tag.tag }}">
+                    <button class="btn btn-default">{{ tag.tag }}</button>
+                </a>
+            {% endfor %}
         </div>
     </div>
 </div>
