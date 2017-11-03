@@ -1,76 +1,64 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
+{% extends 'components/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
         <pre><code>免责许可:
     该站所有的数据来源于用户,由用户自行发布.站长不进行审查.
     同时不承担因用户自行使用数据所造成的一切责任,用户不得以任何理由向站长索赔
     只有在您同意以上条款的情况下,你才拥有使用本站数据的权力    </code></pre>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <a href="/">
-                <button class="btn btn-default">index</button>
-            </a>
-            <a href="/post.html">
-                <button class="btn btn-default">分享坐标</button>
-            </a>
-            <a href="/filter.html">
-                <button class="btn btn-default">筛选</button>
-            </a>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="/">
+                    <button class="btn btn-default">index</button>
+                </a>
+                <a href="/post.html">
+                    <button class="btn btn-default">分享坐标</button>
+                </a>
+                <a href="/filter.html">
+                    <button class="btn btn-default">筛选</button>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <hr>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-striped">
-                <tr>
-                    <td>维度</td>
-                    <td>经度</td>
-                    <td>有啥玩意</td>
-                    <td>发现时间</td>
-                    <td>附近</td>
-                </tr>
-                {% for point in points %}
+        <div class="row">
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-striped">
                     <tr>
-                        <td data-clipboard-text="{{ point.longitude }}">
-                            <button class="btn btn-default">
-                                {{ point.longitude }}
-                            </button>
-                        </td>
-                        <td data-clipboard-text="{{ point.latitude }}">
-                            <button class="btn btn-default">
-                                {{ point.latitude }}
-                            </button>
-                        </td>
-                        <td>{{ point.treasure }}</td>
-                        <td>{{ point.created_date[:19] }}</td>
-                        <td><a href="/nearest/{{ point.longitude }}/{{ point.latitude }}">附近的其他坐标</a></td>
+                        <td>维度</td>
+                        <td>经度</td>
+                        <td>有啥玩意</td>
+                        <td>发现时间</td>
+                        <td>附近</td>
                     </tr>
-                {% endfor %}
+                    {% for point in points %}
+                        <tr>
+                            <td data-clipboard-text="{{ point.longitude }}">
+                                <button class="btn btn-default">
+                                    {{ point.longitude }}
+                                </button>
+                            </td>
+                            <td data-clipboard-text="{{ point.latitude }}">
+                                <button class="btn btn-default">
+                                    {{ point.latitude }}
+                                </button>
+                            </td>
+                            <td>{{ point.treasure }}</td>
+                            <td>{{ point.created_date[:19] }}</td>
+                            <td><a href="/nearest/{{ point.longitude }}/{{ point.latitude }}">附近的其他坐标</a></td>
+                        </tr>
+                    {% endfor %}
 
-            </table>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
-<script>
-    new Clipboard('td');
-</script>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-{#<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
-
-</body>
-</html>
+    <script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
+    <script>
+        new Clipboard('td');
+    </script>
+{% endblock %}
