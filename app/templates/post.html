@@ -39,18 +39,20 @@
                     <div class="form-group">
                         <label for="exampleInputFile">有啥东西</label>
                     </div>
-
-                    <div class="btn-group" data-toggle="buttons">
-                        <ol>
+                    <div class="row">
+                        <div class="btn-group" data-toggle="buttons">
                             {% for tag in tags %}
-                                <li>
+                                <div class="col-md-2">
                                     <label class="btn btn-default">
                                         <input type="checkbox" autocomplete="off" name="treasure"
                                                value="{{ tag.tag }}">{{ tag.tag }}
                                     </label>
-                                </li>
+                                </div>
                             {% endfor %}
-                        </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <hr>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
