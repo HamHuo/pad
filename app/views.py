@@ -1,24 +1,12 @@
-import datetime
-
-import pytz
 from flask import render_template, request, redirect
 
 from app import app
 from models import Point, Tag, PointTag
 
-dtobj1 = datetime.datetime.utcnow()  # utcnow class method
-print(dtobj1)
-
-dtobj3 = dtobj1.replace(tzinfo=pytz.UTC)  # replace method
-
-dtobj_hongkong = dtobj3.astimezone(pytz.timezone("Asia/Hong_Kong"))  # astimezone method
-print(dtobj_hongkong)
-
 
 @app.route('/')
 def homepage():
     x = Point.select().order_by(Point.created_date.desc()).execute()
-    # print(x.__dict__)
     return render_template('index.html', points=x)
 
 
@@ -33,11 +21,6 @@ def query_tag(tag):
     x = (Point.select().join(PointTag).join(Tag)
          .where(Tag.tag == tag)
          .order_by(Point.created_date.desc()))
-    # print(x)
-    for y in x:
-        print(y.__dict__['_data'])
-    # x = Point.select().order_by(Point.created_date.desc()).execute()
-    # print(x.__dict__)
     return render_template('index.html', points=x)
 
 

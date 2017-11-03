@@ -1,5 +1,27 @@
 {% extends 'components/base.html' %}
 {% block content %}
+    <style>
+        .my_a {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a:active {
+            text-decoration: underline;
+        }
+    </style>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -47,7 +69,11 @@
                                     {{ point.latitude }}
                                 </button>
                             </td>
-                            <td>{{ point.treasure }}</td>
+                            <td>
+                                {% for tag in point.treasure.split(', ') %}
+                                    <a class="my_a" href="/tag/{{ tag }}">{{ tag }}</a>
+                                {% endfor %}
+                            </td>
                             <td>{{ point.created_date[:19] }}</td>
                             <td><a href="/nearest/{{ point.longitude }}/{{ point.latitude }}">附近的其他坐标</a></td>
                         </tr>
@@ -57,6 +83,7 @@
             </div>
         </div>
     </div>
+
     <script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
     <script>
         new Clipboard('td');
