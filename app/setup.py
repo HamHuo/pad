@@ -21,4 +21,5 @@ if sys.argv[1] == 'delete':
         t = Tag.get(sys.argv[3])
         t.delete()
     if sys.argv[2] == 'point':
-        Point.get(longitude=sys.argv[3], latitude=sys.argv[4]).delete()
+        p = Point.get(longitude=sys.argv[3], latitude=sys.argv[4])
+        p.delete_instance()

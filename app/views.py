@@ -58,6 +58,8 @@ def post():
     if obj_created:
         for y in tags:
             PointTag.create(tag=y, point=x)
+    else:
+        return '坐标已存在 <a href="/post.html">重新分享</a>'
     return redirect('/')
 
 
