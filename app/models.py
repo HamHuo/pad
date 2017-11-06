@@ -20,8 +20,8 @@ class Tag(db.Model):
 
 
 class PointTag(db.Model):
-    point = ForeignKeyField(Point)
-    tag = ForeignKeyField(Tag)
+    point = ForeignKeyField(Point, related_name='pointtag')
+    tag = ForeignKeyField(Tag, related_name='pointtag')
 
 
 def create_tables():
