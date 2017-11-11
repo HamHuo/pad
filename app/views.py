@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect
 
 from app import app
-from models import Point, Tag, PointTag
+from models import Point, Tag, PointTag, LogPoint
 
 
 @app.route('/')
@@ -37,10 +37,14 @@ def post():
         return redirect('/post.html')
 
     x, obj_created = Point.get_or_create(latitude=latitude, longitude=longitude,
-                                         defaults={'treasure': ', '.join(treasure)})
+                                         defaults={'treasure': ', '.join(treasure)})  # type:Point,bool
     if obj_created:
         for y in tags:
             PointTag.create(tag=y, point=x)
+        l = LogPoint.create(latitude=latitude,
+                            longitude=longitude,
+                            treasure=', '.join(treasure),
+                            created_date=x.created_date)
     else:
         return '坐标已存在 <a href="/post.html">重新分享</a>'
     return redirect('/')
@@ -52,6 +56,13 @@ def show_post():
     # Point.get_or_create(latitude=latitude, longitude=longitude,
     #                     defaults={'treasure': ', '.join(treasure)})
     # return redirect('/')
+
+
+@app.route('/log')
+def log():
+    x = (LogPoint.select()
+         .order_by(LogPoint.created_date.desc()))
+    return render_template('index.html', points=x)
 
 
 @app.route('/nearest/<float:lon>/<float:lat>')

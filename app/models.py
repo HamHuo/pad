@@ -9,6 +9,7 @@ tz = pytz.timezone('Asia/Shanghai')
 
 
 class Point(db.Model):
+    id = PrimaryKeyField()
     longitude = TextField()  # 经度
     latitude = TextField()  # 维度
     treasure = TextField()
@@ -16,6 +17,7 @@ class Point(db.Model):
 
 
 class Tag(db.Model):
+    id = PrimaryKeyField()
     tag = TextField()
 
 
@@ -24,7 +26,15 @@ class PointTag(db.Model):
     tag = ForeignKeyField(Tag)
 
 
+class LogPoint(db.Model):
+    longitude = TextField()  # 经度
+    latitude = TextField()  # 维度
+    treasure = TextField()
+    created_date = TextField()
+
+
 def create_tables():
     Point.create_table()
     Tag.create_table()
     PointTag.create_table()
+    LogPoint.create_table()
