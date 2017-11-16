@@ -33,8 +33,23 @@ class LogPoint(db.Model):
     created_date = TextField()
 
 
+class User(db.Model):
+    id = PrimaryKeyField()
+    username = TextField()
+    password = TextField()
+    placeHolder = TextField()
+    mined = TextField()
+
+
+class UserPoint(db.Model):
+    point = ForeignKeyField(Point, related_name='points')
+    user = ForeignKeyField(User, related_name='points')
+
+
 def create_tables():
     Point.create_table()
     Tag.create_table()
     PointTag.create_table()
     LogPoint.create_table()
+    User.create_table()
+    UserPoint.create_table()

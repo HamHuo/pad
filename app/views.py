@@ -24,6 +24,21 @@ def query_tag(tag):
     return render_template('index.html', points=x)
 
 
+@app.route('/register', methods=['GET', 'POST'])
+def reg():
+    if request.method == 'GET':
+
+        return render_template('register.html')
+    elif request.method == 'POST':
+        """longitude:
+latitude:
+latitude:
+projectpoi-captcha-token:iumX9JGxpsboLvAwuUmxcC00
+Name
+"""
+    pass
+
+
 @app.route('/post', methods=["POST"])
 def post():
     longitude = request.form.get('longitude', '')
