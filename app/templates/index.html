@@ -22,68 +22,68 @@
             text-decoration: underline;
         }
     </style>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
         <pre><code>免责许可:
     该站所有的数据来源于用户,由用户自行发布.站长不进行审查.
     同时不承担因用户自行使用数据所造成的一切责任,用户不得以任何理由向站长索赔
     只有在您同意以上条款的情况下,你才拥有使用本站数据的权力    </code></pre>
-            </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <a href="/">
-                    <button class="btn btn-default">index</button>
-                </a>
-                <a href="/post.html">
-                    <button class="btn btn-default">分享坐标</button>
-                </a>
-                <a href="/filter.html">
-                    <button class="btn btn-default">筛选</button>
-                </a>
-                <a href="/static/name.html">
-                    <button class="btn btn-default">雷达本邮件名</button>
-                </a>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a href="/">
+                <button class="btn btn-default">index</button>
+            </a>
+            <a href="/post.html">
+                <button class="btn btn-default">分享坐标</button>
+            </a>
+            <a href="/filter.html">
+                <button class="btn btn-default">筛选</button>
+            </a>
+            <a href="/static/name.html">
+                <button class="btn btn-default">雷达本邮件名</button>
+            </a>
         </div>
-        <div class="row">
-            <hr>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <table class="table table-striped">
+    </div>
+    <div class="row">
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <tr>
+                    <td>纬度</td>
+                    <td>经度</td>
+                    <td>有啥玩意</td>
+                    <td>发现时间</td>
+                    <td>附近</td>
+                    <td>评价</td>
+                </tr>
+                {% for point in points %}
                     <tr>
-                        <td>纬度</td>
-                        <td>经度</td>
-                        <td>有啥玩意</td>
-                        <td>发现时间</td>
-                        <td>附近</td>
+                        <td data-clipboard-text="{{ point.longitude }}">
+                            <button class="btn btn-default">
+                                {{ point.longitude }}
+                            </button>
+                        </td>
+                        <td data-clipboard-text="{{ point.latitude }}">
+                            <button class="btn btn-default">
+                                {{ point.latitude }}
+                            </button>
+                        </td>
+                        <td>
+                            {% for tag in point.treasure.split(', ') %}
+                                <a class="my_a" href="/tag/{{ tag }}">{{ tag }}</a>
+                            {% endfor %}
+                        </td>
+                        <td>{{ point.created_date[:19] }}</td>
+                        <td><a href="/nearest/{{ point.longitude }}/{{ point.latitude }}">附近的其他坐标</a></td>
+                        <td>评价</td>
                     </tr>
-                    {% for point in points %}
-                        <tr>
-                            <td data-clipboard-text="{{ point.longitude }}">
-                                <button class="btn btn-default">
-                                    {{ point.longitude }}
-                                </button>
-                            </td>
-                            <td data-clipboard-text="{{ point.latitude }}">
-                                <button class="btn btn-default">
-                                    {{ point.latitude }}
-                                </button>
-                            </td>
-                            <td>
-                                {% for tag in point.treasure.split(', ') %}
-                                    <a class="my_a" href="/tag/{{ tag }}">{{ tag }}</a>
-                                {% endfor %}
-                            </td>
-                            <td>{{ point.created_date[:19] }}</td>
-                            <td><a href="/nearest/{{ point.longitude }}/{{ point.latitude }}">附近的其他坐标</a></td>
-                        </tr>
-                    {% endfor %}
+                {% endfor %}
 
-                </table>
-            </div>
+            </table>
         </div>
     </div>
 

@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, send_from_directory
 
 from app import app
 from models import Point, Tag, PointTag, LogPoint
