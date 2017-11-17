@@ -31,22 +31,6 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <a href="/">
-                <button class="btn btn-default">index</button>
-            </a>
-            <a href="/post.html">
-                <button class="btn btn-default">分享坐标</button>
-            </a>
-            <a href="/filter.html">
-                <button class="btn btn-default">筛选</button>
-            </a>
-            <a href="/static/name.html">
-                <button class="btn btn-default">雷达本邮件名</button>
-            </a>
-        </div>
-    </div>
-    <div class="row">
         <hr>
     </div>
     <div class="row">
@@ -57,18 +41,22 @@
                     <td>经度</td>
                     <td>有啥玩意</td>
                     <td>发现时间</td>
-                    <td>附近</td>
-                    <td>评价</td>
+                    {#                    <td>附近</td>#}
+                    {% if user %}
+                        {#                    <td>评价</td>#}
+                        <td>去过了吗</td>
+                    {% endif %}
                 </tr>
                 {% for point in points %}
                     <tr>
+
                         <td data-clipboard-text="{{ point.longitude }}">
-                            <button class="btn btn-default">
+                            <button class="btn btn-default nu">
                                 {{ point.longitude }}
                             </button>
                         </td>
                         <td data-clipboard-text="{{ point.latitude }}">
-                            <button class="btn btn-default">
+                            <button class="btn btn-default nu">
                                 {{ point.latitude }}
                             </button>
                         </td>
@@ -78,8 +66,22 @@
                             {% endfor %}
                         </td>
                         <td>{{ point.created_date[:19] }}</td>
-                        <td><a href="/nearest/{{ point.longitude }}/{{ point.latitude }}">附近的其他坐标</a></td>
-                        <td>评价</td>
+                        {#                        <td><a href="/nearest/{{ point.longitude }}/{{ point.latitude }}">附近的其他坐标</a></td>#}
+                        {#                        <td>评价</td>#}
+                        {% if user %}
+                            {#                    <td>评价</td>#}
+                            <td>
+                                {% if user and checkPointGone(point.id,user) %}
+                                    <label for="{{ point.id }}"></label>
+                                    <input type="checkbox" class="cb" id="{{ point.id }}" checked>
+                                    <span id="{{ '{}s'.format(point.id) }}"></span>
+                                {% else %}
+                                    <label for="{{ point.id }}"></label>
+                                    <input type="checkbox" class="cb" id="{{ point.id }}">
+                                    <span id="{{ '{}s'.format(point.id) }}"></span>
+                                {% endif %}
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
 
@@ -87,6 +89,39 @@
         </div>
     </div>
 
+    <script>
+        $('.cb').change(function (e) {
+            var point_id = e.target.id;
+            var cb = $('#' + point_id);
+            var checked = cb.is(':checked');
+            console.log(checked);
+            let url = '';
+            if (checked) {
+                url = 'gone';
+            } else {
+                url = 'ungone';
+            }
+            $.post(url, data = {'point_id': point_id}, function (data) {
+                if (data === 'success') {
+                    $('#' + point_id + 's').html('success');
+                } else {
+                    $('#' + point_id + 's').html('error');
+                }
+            }).fail(function () {
+                alert("error");
+            });
+
+        });
+    </script>
+    <style>.gone {
+        background-color: green !important;
+
+    }
+
+    .ungone {
+        background-color: yellow !important;
+    }
+    </style>
     <script src="https://cdn.bootcss.com/clipboard.js/1.7.1/clipboard.min.js"></script>
     <script>
         new Clipboard('td');

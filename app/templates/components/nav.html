@@ -1,0 +1,42 @@
+<div class="col-md-12">
+    <a href="/">
+        <button class="btn btn-default">index</button>
+    </a>
+    <a href="/post.html">
+        <button class="btn btn-default">分享坐标</button>
+    </a>
+    <a href="/filter.html">
+        <button class="btn btn-default">筛选</button>
+    </a>
+    <a href="/static/name.html">
+        <button class="btn btn-default">雷达本邮件名</button>
+    </a>
+    {% if user %}
+        <button id="logout" class="btn btn-default">登出</button>
+    {% else %}
+        <a href="/login">
+            <button class="btn btn-default">登录</button>
+        </a>
+        <a href="/register">
+            <button class="btn btn-default">注册</button>
+        </a>
+    {% endif %}
+</div>
+<script>
+
+    function deleteAllCookies() {
+        var cookies = document.cookie.split(";");
+
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+    }
+
+    $("#logout").click(function () {
+        deleteAllCookies();
+        window.location.reload()
+    })
+</script>

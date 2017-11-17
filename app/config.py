@@ -3,6 +3,8 @@ import os
 
 db_path = os.path.join(os.environ.get('HOME', os.environ.get('USERPROFILE')), 'db', 'example.db')
 
+sec = os.getenv('website_secret')
+
 
 class Configuration(object):
     DATABASE = {
@@ -11,4 +13,7 @@ class Configuration(object):
         'check_same_thread': False,
     }
     DEBUG = False
-    SECRET_KEY = 'shhh86468486h'
+    SECRET_KEY = sec
+    SESSION_COOKIE_SECURE = True
+    REMEMBER_COOKIE_SECURE = True
+    TEMPLATES_AUTO_RELOAD = True

@@ -1,3 +1,44 @@
 {% extends 'components/base.html' %}
 {% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <form id="form" action="/login" method="post">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">用户名
+                        <input type="text" class="form-control" name="username">
+                    </label>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">密码
+                            <input type="password" id="pw" class="form-control" name="password">
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <script src="https://ppoi.org/lib/captcha.min.js" async></script>
+                            <div class="projectpoi-captcha"
+                                    {#                                 data-autostart="true"#}
+                                    {#                                 data-callback="c"#}
+                                 data-whitelabel="true"
+                                 data-hashes="{{ workload }}"
+                                 data-key="DG8wtDDZHmatfrDorR1P9zWk"
+                                 data-disable-elements="#submit"
+                            >
+                                <em>加载验证码中...<br>
+                                    如果你看不到验证码,请禁用广告屏蔽器</em>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <hr>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="submit" id="submit" class="btn btn-default" value="submit"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

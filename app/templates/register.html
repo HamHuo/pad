@@ -2,27 +2,35 @@
 {% block content %}
     <div class="row">
         <div class="col-md-12">
-            <form action="/register" method="post">
+            <form id="form" action="/register" method="post">
                 <div class="form-group">
                     <label for="exampleInputEmail1">用户名
-                        <input type="text" class="form-control" name="longitude">
+                        <input type="text" class="form-control" name="username">
                     </label>
                     <div class="form-group">
                         <label for="exampleInputPassword1">密码
-                            <input type="password" class="form-control" name="latitude">
+                            <input type="password" id="pw" class="form-control" name="password">
                         </label>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">密码again
-                            <input type="password" class="form-control" name="latitude">
+                            <input type="password" id="pw-again" class="form-control">
+                            <span id="help-block"></span>
                         </label>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <script src="https://ppoi.org/lib/captcha.min.js" async></script>
-                            <div class="projectpoi-captcha" data-hashes="1" data-key="DG8wtDDZHmatfrDorR1P9zWk">
-                                <em>Loading Captcha...<br>
-                                    If it doesn't load, please disable Adblock!</em>
+                            <div class="projectpoi-captcha"
+                                    {#                                 data-autostart="true"#}
+                                 data-callback="c"
+                                 data-whitelabel="true"
+                                 data-hashes="{{ workload }}"
+                                 data-key="DG8wtDDZHmatfrDorR1P9zWk"
+                                    {#                                 data-disable-elements="#submit"#}
+                            >
+                                <em>加载验证码中...<br>
+                                    如果你看不到验证码,请禁用广告屏蔽器</em>
                             </div>
                         </div>
 
@@ -31,12 +39,51 @@
                 <div class="row">
                     <hr>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <input type="submit" class="btn btn-default" value="Submit"/>
-                    </div>
-                </div>
             </form>
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="submit" class="btn btn-default">Submit</button>
+                </div>
+            </div>
+            <script>
+                var checked = false;
+
+                function c() {
+                    checked = true;
+                }
+
+                function check2pwd() {
+                    var input1 = $("#pw");
+                    var input2 = $("#pw-again");
+                    if (input1.val() !== input2.val()) {
+                        $('#help-block').html('两次输入的密码不一样');
+                        $('input[type="submit"]').attr('disabled', 'disabled');
+                        return false
+                    } else {
+                        $('#help-block').html('');
+                        if (checked) {
+                            $('input[type="submit"]').prop('disabled', false);
+                        }
+                        return true
+                    }
+                }
+
+                $("#pw-again").keyup(check2pwd);
+                $("#submit").click(function () {
+                    var ch = check2pwd();
+                    if (!ch) {
+                        alert('两次输入的密码不一样')
+                    } else {
+                        if (checked) {
+                            $('form').submit();
+                        } else {
+                            alert('还没有通过验证')
+                        }
+                    }
+
+                })
+
+            </script>
         </div>
     </div>
 {% endblock %}

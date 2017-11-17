@@ -5,3 +5,4 @@ peewee
 flask-peewee
 pytz
 flask-login
+requests
