@@ -5,11 +5,13 @@ from models import create_tables, Tag, Point, PointTag, UserPoint
 if len(sys.argv) >= 2:
 
     if sys.argv[1] == 'init':
+        t = Tag.table_exists()
         create_tables()
-        for tag in {'mp-rush', '1E金币龙王', '潜觉扩张', '稀有素材rush',
-                    '三代雷达龙(光)', '三代雷达龙(暗)', '三代雷达龙(水)', '三代雷达龙(火)', '三代雷达龙(木)',
-                    '297光玻璃', '彩喇叭', '圣诞龙(不区分颜色)', '地狱级npc', '觉醒素材'}:
-            Tag.create(tag=tag)
+        if not t:
+            for tag in ['地狱级npc', '觉醒素材', 'mp-rush', '1E金币龙王', '潜觉扩张', '稀有素材rush',
+                        '三代雷达龙(光)', '三代雷达龙(暗)', '三代雷达龙(水)', '三代雷达龙(火)', '三代雷达龙(木)',
+                        '297光玻璃', '彩喇叭', '圣诞龙(不区分颜色)']:
+                Tag.create(tag=tag)
 
     if sys.argv[1] == 'clear':
         Point.delete().execute()
