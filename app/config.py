@@ -16,4 +16,4 @@ class Configuration(object):
     SECRET_KEY = sec
     SESSION_COOKIE_SECURE = True
     REMEMBER_COOKIE_SECURE = True
-    TEMPLATES_AUTO_RELOAD = True
+    # TEMPLATES_AUTO_RELOAD = True
