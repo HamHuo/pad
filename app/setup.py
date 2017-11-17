@@ -1,6 +1,6 @@
 import sys
 
-from models import create_tables, Tag, Point, PointTag
+from models import create_tables, Tag, Point, PointTag, UserPoint
 
 if len(sys.argv) >= 2:
 
@@ -28,6 +28,8 @@ if len(sys.argv) >= 2:
             else:
                 p.treasure = ', '.join(new_tr)
                 p.save()
+        for p in UserPoint.select():
+            p.delete_instance()
 
     if sys.argv[1] == 'add':
         if sys.argv[2] == 'tag':
