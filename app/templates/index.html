@@ -41,7 +41,7 @@
                     <td>经度</td>
                     <td>有啥玩意</td>
                     <td>发现时间</td>
-                    {#                    <td>附近</td>#}
+                    <td>附近</td>
                     {% if user %}
                         {#                    <td>评价</td>#}
                         <td>去过了吗</td>
@@ -66,7 +66,7 @@
                             {% endfor %}
                         </td>
                         <td>{{ point.created_date[:19] }}</td>
-                        {#                        <td><a href="/nearest/{{ point.longitude }}/{{ point.latitude }}">附近的其他坐标</a></td>#}
+                        <td><a href="{{ url_for('nearest',lon=point.longitude,lat=point.latitude) }}">附近的其他坐标</a></td>
                         {#                        <td>评价</td>#}
                         {% if user %}
                             {#                    <td>评价</td>#}

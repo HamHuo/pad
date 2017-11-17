@@ -64,7 +64,7 @@ def gone():
 
 
 @app.route('/nearest/<float:lon>/<float:lat>')
-def near(lon, lat):
+def nearest(lon, lat):
     x = list(Point.select().execute())  # type: list[Point]
     x.sort(key=lambda z: (float(z.longitude) - lon) ** 2 + (float(z.latitude) - lat) ** 2)
     return render_template('index.html', points=x)
