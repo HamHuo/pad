@@ -4,5 +4,4 @@ jinja2
 peewee
 flask-peewee
 pytz
-flask-login
 requests
