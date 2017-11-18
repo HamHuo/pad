@@ -107,7 +107,9 @@ def reg():
     job_need_to_do = 256 * 4
     if request.method == 'GET':
 
-        return render_template('register.html', workload=job_need_to_do, message='请不要使用移动设备,在点击验证码后别说我没提醒过..')
+        return render_template('register.html',
+                               workload=job_need_to_do,
+                               message='请不要使用移动设备通过验证码\n登录后可以标记某点是否去过')
     elif request.method == 'POST':
         token = request.form.get('projectpoi-captcha-token')
         username = request.form.get('username')
