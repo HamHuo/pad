@@ -104,7 +104,7 @@ def query_tag(tag):
 
 @app.route('/register', methods=['GET', 'POST'])
 def reg():
-    job_need_to_do = 256 * 2
+    job_need_to_do = 256 * 4
     if request.method == 'GET':
 
         return render_template('register.html', workload=job_need_to_do, message='请不要使用移动设备,在点击验证码后别说我没提醒过..')
