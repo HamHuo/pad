@@ -4,7 +4,6 @@ import os
 db_path = os.path.join(os.environ.get('HOME', os.environ.get('USERPROFILE')), 'db', 'example.db')
 
 sec = os.getenv('website_secret')
-ppoi_secret = os.getenv('ppoi_key')
 
 
 class Configuration(object):

@@ -104,50 +104,29 @@ def query_tag(tag):
 
 @app.route('/register', methods=['GET', 'POST'])
 def reg():
-    job_need_to_do = 256 * 4
     if request.method == 'GET':
-
         return render_template('register.html',
-                               workload=job_need_to_do,
-                               message='请不要使用移动设备通过验证码\n登录后可以标记某点是否去过')
+                               message='登录后可以标记某点是否去过')
     elif request.method == 'POST':
-        token = request.form.get('projectpoi-captcha-token')
         username = request.form.get('username')
         password = request.form.get('password')
 
         if (not username) or (not password):
             return render_template('register.html',
-                                   workload=job_need_to_do,
                                    message='请填写用户名和密码')
-        elif not token:
-            return render_template('register.html',
-                                   workload=job_need_to_do,
-                                   message='你在搞笑吗')
         else:
-            r = requests.post('https://api.ppoi.org/token/verify',
-                              data={'secret': ppoi_secret,
-                                    'token': token,
-                                    'hashes': job_need_to_do})
-            r = r.json()
-            if r['success']:
-                # create user here
-                u, _ = User.get_or_create(username=username,
-                                          defaults={
-                                              'password': password,
-                                              'mined': job_need_to_do,
-                                              'ppoi_token': token})
-                if not _:
-                    return render_template('register.html',
-                                           workload=job_need_to_do,
-                                           message='用户名已经被别人用了')
-                else:
-                    r = make_response(redirect('/'))
-                    r = set_login_cookies(r, u)
-                    return r
-            else:
+            # create user here
+            u, _ = User.get_or_create(username=username,
+                                      defaults={
+                                          'password': password,
+                                      })
+            if not _:
                 return render_template('register.html',
-                                       workload=job_need_to_do,
-                                       message='不要投机取巧哦')
+                                       message='用户名已经被别人用了')
+            else:
+                r = make_response(redirect('/'))
+                r = set_login_cookies(r, u)
+                return r
 
 
 def set_login_cookies(r, u):
@@ -157,44 +136,26 @@ def set_login_cookies(r, u):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    job_need_to_do = 256 * 2
     if request.method == 'GET':
-        return render_template('login.html', workload=job_need_to_do, message='请不要使用移动设备,在点击验证码后别说我没提醒过..')
+        return render_template('login.html')
     elif request.method == 'POST':
-        token = request.form.get('projectpoi-captcha-token')
         username = request.form.get('username')
         password = request.form.get('password')
 
         if (not username) or (not password):
             return render_template('login.html',
-                                   workload=job_need_to_do,
                                    message='请填写用户名和密码')
-        elif not token:
-            return render_template('login.html',
-                                   workload=job_need_to_do,
-                                   message='你在搞笑吗')
         else:
-            r = requests.post('https://api.ppoi.org/token/verify',
-                              data={'secret': ppoi_secret,
-                                    'token': token,
-                                    'hashes': job_need_to_do})
-            r = r.json()
-            if r['success']:
-                # create user here
-                try:
-                    u = User.get(username=username,
-                                 password=password)
-                    r = make_response(redirect('/'))
-                    r = set_login_cookies(r, u)
-                    return r
-                except User.DoesNotExist:
-                    return render_template('login.html',
-                                           workload=job_need_to_do,
-                                           message='用户名或者密码错误')
-            else:
+            # create user here
+            try:
+                u = User.get(username=username,
+                             password=password)
+                r = make_response(redirect('/'))
+                r = set_login_cookies(r, u)
+                return r
+            except User.DoesNotExist:
                 return render_template('login.html',
-                                       workload=job_need_to_do,
-                                       message='不要投机取巧哦')
+                                       message='用户名或者密码错误')
     pass
 
 
