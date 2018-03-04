@@ -2,7 +2,7 @@ import datetime
 
 from flask import render_template, request, redirect, send_from_directory, make_response
 
-from app import app, ppoi_secret
+from app import app
 from models import Point, Tag, PointTag, LogPoint, User, UserPoint
 import requests
 import json
