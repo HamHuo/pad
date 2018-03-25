@@ -119,6 +119,8 @@ def reg():
             u, _ = User.get_or_create(username=username,
                                       defaults={
                                           'password': password,
+                                          'mined': 233,
+                                          'ppoi_token': 233
                                       })
             if not _:
                 return render_template('register.html',
