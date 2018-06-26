@@ -1,24 +1,24 @@
-<div class="col-md-12">
-    <a href="/">
-        <button class="btn btn-default">index</button>
+<div class="col-md-12 nav">
+    <a href="/" class="link">
+        <button class="btn btn-primary">index</button>
     </a>
-    <a href="/post.html">
-        <button class="btn btn-default">分享坐标</button>
+    <a href="/post.html" class="link">
+        <button class="btn btn-warning">分享坐标</button>
     </a>
-    <a href="/filter.html">
-        <button class="btn btn-default">筛选</button>
+    <a href="/filter.html" class="link">
+        <button class="btn btn-seccess">筛选</button>
     </a>
-    <a href="/static/name.html">
+    <a href="/static/name.html" class="link">
         <button class="btn btn-default">雷达本邮件名</button>
     </a>
     {% if user %}
-        <button id="logout" class="btn btn-default">登出</button>
+        <button id="logout" class="btn btn-primary">登出</button>
     {% else %}
-        <a href="/login">
-            <button class="btn btn-default">登录</button>
+        <a href="/login" class="link">
+            <button class="btn btn-primary">登录</button>
         </a>
-        <a href="/register">
-            <button class="btn btn-default">注册</button>
+        <a href="/register" class="link">
+            <button class="btn btn-danger">注册</button>
         </a>
     {% endif %}
 </div>
